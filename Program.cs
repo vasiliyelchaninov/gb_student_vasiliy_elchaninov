@@ -1,55 +1,150 @@
-﻿// Задача 25: Напишите цикл, который принимает на вход два числа
-// (A и B) и возводит число A в натуральную степень B.
-// 3, 5 -> 243 (3⁵)
-// 2, 4 -> 16
+﻿//Задача 34:
+/* Задача 34: Задайте массив заполненный случайными положительными трёхзначными числами.
+//Напишите программу, которая покажет количество чётных чисел в массиве.
+[345, 897, 568, 234] -> 2
+*/
+int size = ReadInt("Введите размерность массива: ");
+int [] numbers = new int[size];
 
-Console.WriteLine($"\nЗадача 25. Возведене числа A в натуральную степень B");
-
-int Exponentiation(int numberA, int numberB){
-int result = 1;
-for(int i=1; i <= numberB; i++){
-result = result * numberA;
-  }
-// int result = Math.Pow(numberA, numberB);
-return result;
-}
-
-Console.Write("Введите число A: ");
-int numberA = Convert.ToInt32(Console.ReadLine());
-Console.Write("Введите число B: ");
-int numberB = Convert.ToInt32(Console.ReadLine());
-int exponentiation = Exponentiation(numberA, numberB);
-Console.WriteLine("Ответ: " + exponentiation);
-
-
-// Задача 27: Напишите программу, которая принимает на вход число
-// и выдаёт сумму цифр в числе.
-// 452 -> 11
-// 82 -> 10
-// 9012 -> 12
-
-Console.WriteLine($"\nЗадача 27. Выдаёт сумму цифр в числе");
-Console.Write("Введите число N: ");
-int numberN = Convert.ToInt32(Console.ReadLine());
-
-int SumNumber(int numberN){
-    
-int counter = Convert.ToString(numberN).Length;
-int advance = 0;
+FillArrayRandomNumbers(numbers);
+PrintArray(numbers);
 int result = 0;
 
-for (int i = 0; i < counter; i++){
-advance = numberN - numberN % 10;
-result = result + (numberN - advance);
-numberN = numberN / 10;    }
-return result;
+for (int i = 0; i < numbers.Length; i++)
+{
+    if (numbers[i] % 2 == 0)
+    {
+        result++;
+    }
+}
+if (result % 10 == 1)
+{
+    Console.WriteLine($"В массиве {result} четное число");
+}
+if (result % 10 == 2 || result % 10 == 3 || result % 10 == 4)
+{
+    Console.WriteLine($"В массиве {result} четных числа");
+}
+else
+
+    Console.WriteLine($"В массиве {result} четных чисел");
+
+void FillArrayRandomNumbers(int [] array)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        array[i] = new Random().Next(99, 999);
+    }
 }
 
-int sumNumber = SumNumber(numberN);
-Console.WriteLine("Сумма цифр в числе: " + sumNumber);
+void PrintArray(int[] array)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        Console.Write(array[i] + " ");
+    }
+    Console.WriteLine();
+}
 
-// Задача 29: Напишите программу, которая задаёт массив из
-// 8 элементов и выводит их на экран.
-// 1, 2, 5, 7, 19 -> [1, 2, 5, 7, 19]
-// 6, 1, 33 -> [6, 1, 33]
 
+int ReadInt(string message)
+{
+    Console.Write(message);
+    return Convert.ToInt32(Console.ReadLine());
+}
+
+//Задача 36:
+/* Задача 36: Задайте одномерный массив, заполненный случайными числами.
+// Найдите сумму элементов, стоящих на нечётных позициях.
+[3, 7, 23, 12] -> 19   [-4, -6, 89, 6] -> 0
+*/
+
+int size = ReadInt("Введите размерность массива: ");
+int min = ReadInt("Введите минимальное число массива: ");
+int max = ReadInt("Введите максимальное число массива: ");
+int [] numbers = new int[size];
+
+FillArrayRandomNumbers(numbers);
+PrintArray(numbers);
+int result = 0;
+
+for (int i = 0; i < numbers.Length; i++)
+{
+    if (i % 2 != 0)
+    {
+        result += numbers[i];
+    }
+}
+Console.WriteLine($"Сумма элементов нечетных позиций = {result}");
+
+
+void FillArrayRandomNumbers(int [] array)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        array[i] = new Random().Next(min, max);
+    }
+}
+
+void PrintArray(int[] array)
+{
+    for (int i = 0; i < array.Length; i++)
+    {
+        Console.Write(array[i] + " ");
+    }
+    Console.WriteLine();
+}
+
+int ReadInt(string message)
+{
+    Console.Write(message);
+    return Convert.ToInt32(Console.ReadLine());
+}
+
+
+//Задача 38:
+/*Задача 38: Задайте массив вещественных чисел.
+// Найдите разницу между максимальным и минимальным элементов массива.
+[3 7 22 2 78] -> 76
+*/
+Console.WriteLine("Введите размер массива  ");
+int size = Convert.ToInt32(Console.ReadLine());
+double[] numbers = new double[size];
+FillArrayRandomNumbers(numbers);
+Console.WriteLine("массив: ");
+PrintArray(numbers);
+double min = Int32.MaxValue;
+double max = Int32.MinValue;
+
+for (int z = 0; z < numbers.Length; z++)
+{
+    if (numbers[z] > max)
+        {
+            max = numbers[z];
+        }
+    if (numbers[z] < min)
+        {
+            min = numbers[z];
+        }
+}
+
+Console.WriteLine($"всего {numbers.Length} чисел. Максимальное значение = {max}, минимальное значение = {min}");
+Console.WriteLine($"Разница между максимальным и минимальным значением = {max - min}");
+
+void FillArrayRandomNumbers(double[] numbers)
+{
+    for(int i = 0; i < numbers.Length; i++)
+        {
+            numbers[i] = Convert.ToDouble(new Random().Next(100,1000)) / 100;
+        }
+}
+void PrintArray(double[] numbers)
+{
+    Console.Write("[ ");
+    for(int i = 0; i < numbers.Length; i++)
+        {
+            Console.Write(numbers[i] + " ");
+        }
+    Console.Write("]");
+    Console.WriteLine();
+}
