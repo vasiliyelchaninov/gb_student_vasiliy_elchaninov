@@ -1,150 +1,99 @@
-﻿//Задача 34:
-/* Задача 34: Задайте массив заполненный случайными положительными трёхзначными числами.
-//Напишите программу, которая покажет количество чётных чисел в массиве.
-[345, 897, 568, 234] -> 2
-*/
-int size = ReadInt("Введите размерность массива: ");
-int [] numbers = new int[size];
+﻿// Задача 41:
+// Пользователь вводит с клавиатуры M чисел.
+// Посчитайте, сколько чисел больше 0 ввёл пользователь.
+// 0, 7, 8, -2, -2 -> 2
+// -1, -7, 567, 89, 223-> 3
 
-FillArrayRandomNumbers(numbers);
-PrintArray(numbers);
-int result = 0;
-
-for (int i = 0; i < numbers.Length; i++)
-{
-    if (numbers[i] % 2 == 0)
-    {
-        result++;
-    }
-}
-if (result % 10 == 1)
-{
-    Console.WriteLine($"В массиве {result} четное число");
-}
-if (result % 10 == 2 || result % 10 == 3 || result % 10 == 4)
-{
-    Console.WriteLine($"В массиве {result} четных числа");
-}
-else
-
-    Console.WriteLine($"В массиве {result} четных чисел");
-
-void FillArrayRandomNumbers(int [] array)
-{
-    for (int i = 0; i < array.Length; i++)
-    {
-        array[i] = new Random().Next(99, 999);
-    }
-}
-
-void PrintArray(int[] array)
-{
-    for (int i = 0; i < array.Length; i++)
-    {
-        Console.Write(array[i] + " ");
-    }
-    Console.WriteLine();
-}
-
-
-int ReadInt(string message)
-{
-    Console.Write(message);
-    return Convert.ToInt32(Console.ReadLine());
-}
-
-//Задача 36:
-/* Задача 36: Задайте одномерный массив, заполненный случайными числами.
-// Найдите сумму элементов, стоящих на нечётных позициях.
-[3, 7, 23, 12] -> 19   [-4, -6, 89, 6] -> 0
+/*Console.WriteLine($"Задача 41. Cколько чисел больше 0 ввёл пользователь \n");
+Console.Write($"Введи число М(количество чисел): ");
+Console.WriteLine($"Введено чисел больше 0: {Comparison(massiveNumbers)} ");
 */
 
-int size = ReadInt("Введите размерность массива: ");
-int min = ReadInt("Введите минимальное число массива: ");
-int max = ReadInt("Введите максимальное число массива: ");
-int [] numbers = new int[size];
+Console.Clear();
 
-FillArrayRandomNumbers(numbers);
-PrintArray(numbers);
-int result = 0;
+Console.WriteLine($"Задача 41. Cколько чисел больше 0 ввёл пользователь \n");
+Console.Write($"Введи число М(количество чисел): ");
+int m = Convert.ToInt32(Console.ReadLine());
+int[] massiveNumbers = new int[m];
 
-for (int i = 0; i < numbers.Length; i++)
-{
-    if (i % 2 != 0)
-    {
-        result += numbers[i];
-    }
-}
-Console.WriteLine($"Сумма элементов нечетных позиций = {result}");
-
-
-void FillArrayRandomNumbers(int [] array)
-{
-    for (int i = 0; i < array.Length; i++)
-    {
-        array[i] = new Random().Next(min, max);
-    }
-}
-
-void PrintArray(int[] array)
-{
-    for (int i = 0; i < array.Length; i++)
-    {
-        Console.Write(array[i] + " ");
-    }
-    Console.WriteLine();
-}
-
-int ReadInt(string message)
-{
-    Console.Write(message);
-    return Convert.ToInt32(Console.ReadLine());
+void InputNumbers(int m){
+for (int i = 0; i < m; i++)
+  {
+    Console.Write($"Введи {i+1} число: ");
+    massiveNumbers[i] = Convert.ToInt32(Console.ReadLine());
+  }
 }
 
 
-//Задача 38:
-/*Задача 38: Задайте массив вещественных чисел.
-// Найдите разницу между максимальным и минимальным элементов массива.
-[3 7 22 2 78] -> 76
+int Comparison(int[] massiveNumbers)
+{
+  int count = 0;
+  for (int i = 0; i < massiveNumbers.Length; i++)
+  {
+    if(massiveNumbers[i] > 0 ) count += 1; 
+  }
+  return count;
+}
+
+InputNumbers(m);
+
+Console.WriteLine($"Введено чисел больше 0: {Comparison(massiveNumbers)} ");
+
+// Задача 43:
+// Напишите программу, которая найдёт точку пересечения двух прямых,
+// заданных уравнениями y = k1 * x + b1, y = k2 * x + b2;
+// значения b1, k1, b2 и k2 задаются пользователем.
+// b1 = 2, k1 = 5, b2 = 4, k2 = 9 -> (-0,5; 5,5)
+
+/*Console.WriteLine($"\nЗадача 43.  Найти точку пересечения двух прямых \n");
+Console.Write($"Введите коэффициенты {i+1}-го уравнения (y = k * x + b):\n");
+Console.Write($"Введите коэффициент k: ");
+Console.Write($"Введите коэффициент b: ");
+Console.Write($"\nТочка пересечения прямых: ({crossPoint[0]}, {crossPoint[1]})");
 */
-Console.WriteLine("Введите размер массива  ");
-int size = Convert.ToInt32(Console.ReadLine());
-double[] numbers = new double[size];
-FillArrayRandomNumbers(numbers);
-Console.WriteLine("массив: ");
-PrintArray(numbers);
-double min = Int32.MaxValue;
-double max = Int32.MinValue;
 
-for (int z = 0; z < numbers.Length; z++)
-{
-    if (numbers[z] > max)
-        {
-            max = numbers[z];
-        }
-    if (numbers[z] < min)
-        {
-            min = numbers[z];
-        }
+Console.WriteLine($"\nЗадача 43.  Найти точку пересечения двух прямых \n");
+
+double[,] coeff = new double[2, 2];
+double[] crossPoint = new double[2];
+
+void InputCoefficients(){
+  for (int i = 0; i < coeff.GetLength(0); i++)
+  {
+    Console.Write($"Введите коэффициенты {i+1}-го уравнения (y = k * x + b):\n");
+    for (int j = 0; j < coeff.GetLength(1); j++)
+    {
+      if(j==0) Console.Write($"Введите коэффициент k: ");
+      else Console.Write($"Введите коэффициент b: ");
+      coeff[i,j] = Convert.ToInt32(Console.ReadLine());
+    }
+  }
 }
 
-Console.WriteLine($"всего {numbers.Length} чисел. Максимальное значение = {max}, минимальное значение = {min}");
-Console.WriteLine($"Разница между максимальным и минимальным значением = {max - min}");
+double[] Decision(double[,] coeff)
+{
+  crossPoint[0] = (coeff[1,1] - coeff[0,1]) / (coeff[0,0] - coeff[1,0]);
+  crossPoint[1] = crossPoint[0] * coeff[0,0] + coeff[0,1];
+  return crossPoint;
+}
 
-void FillArrayRandomNumbers(double[] numbers)
+void OutputResponse(double[,] coeff)
 {
-    for(int i = 0; i < numbers.Length; i++)
-        {
-            numbers[i] = Convert.ToDouble(new Random().Next(100,1000)) / 100;
-        }
+  if (coeff[0,0] == coeff[1,0] && coeff[0,1] == coeff[1,1]) 
+  {
+    Console.Write($"\nПрямые совпадают");
+  }
+  else if (coeff[0,0] == coeff[1,0] && coeff[0,1] != coeff[1,1]) 
+  {
+    Console.Write($"\nПрямые параллельны");
+  }
+  else 
+  {
+    Decision(coeff);
+    Console.Write($"\nТочка пересечения прямых: ({crossPoint[0]}, {crossPoint[1]})");
+  }
 }
-void PrintArray(double[] numbers)
-{
-    Console.Write("[ ");
-    for(int i = 0; i < numbers.Length; i++)
-        {
-            Console.Write(numbers[i] + " ");
-        }
-    Console.Write("]");
-    Console.WriteLine();
-}
+
+InputCoefficients();
+OutputResponse(coeff);
+
