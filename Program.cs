@@ -1,99 +1,156 @@
-﻿// Задача 41:
-// Пользователь вводит с клавиатуры M чисел.
-// Посчитайте, сколько чисел больше 0 ввёл пользователь.
-// 0, 7, 8, -2, -2 -> 2
-// -1, -7, 567, 89, 223-> 3
-
-/*Console.WriteLine($"Задача 41. Cколько чисел больше 0 ввёл пользователь \n");
-Console.Write($"Введи число М(количество чисел): ");
-Console.WriteLine($"Введено чисел больше 0: {Comparison(massiveNumbers)} ");
+﻿//Задача 47:
+//Задайте двумерный массив размером m×n
+// заполненный случайными вещественными числами.
+//m = 3, n = 4.
+//0,5 7 -2 -0,2
+//1 -3,3 8 -9,9
+//8 7,8 -7,1 9
+/*Console.WriteLine("введите количество строк");
+Console.WriteLine("введите количество столбцов");
 */
 
-Console.Clear();
+Console.WriteLine("Задача 47. введите количество строк");
+int linesVol = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("введите количество столбцов");
+int columnsVol = Convert.ToInt32(Console.ReadLine());
+double[,] numbers = new double[linesVol, columnsVol];
+FillArrayRandomNumbers(numbers);
+PrintArray(numbers);
 
-Console.WriteLine($"Задача 41. Cколько чисел больше 0 ввёл пользователь \n");
-Console.Write($"Введи число М(количество чисел): ");
-int m = Convert.ToInt32(Console.ReadLine());
-int[] massiveNumbers = new int[m];
-
-void InputNumbers(int m){
-for (int i = 0; i < m; i++)
-  {
-    Console.Write($"Введи {i+1} число: ");
-    massiveNumbers[i] = Convert.ToInt32(Console.ReadLine());
-  }
-}
-
-
-int Comparison(int[] massiveNumbers)
+void FillArrayRandomNumbers(double[,] array)
 {
-  int count = 0;
-  for (int i = 0; i < massiveNumbers.Length; i++)
-  {
-    if(massiveNumbers[i] > 0 ) count += 1; 
-  }
-  return count;
-}
-
-InputNumbers(m);
-
-Console.WriteLine($"Введено чисел больше 0: {Comparison(massiveNumbers)} ");
-
-// Задача 43:
-// Напишите программу, которая найдёт точку пересечения двух прямых,
-// заданных уравнениями y = k1 * x + b1, y = k2 * x + b2;
-// значения b1, k1, b2 и k2 задаются пользователем.
-// b1 = 2, k1 = 5, b2 = 4, k2 = 9 -> (-0,5; 5,5)
-
-/*Console.WriteLine($"\nЗадача 43.  Найти точку пересечения двух прямых \n");
-Console.Write($"Введите коэффициенты {i+1}-го уравнения (y = k * x + b):\n");
-Console.Write($"Введите коэффициент k: ");
-Console.Write($"Введите коэффициент b: ");
-Console.Write($"\nТочка пересечения прямых: ({crossPoint[0]}, {crossPoint[1]})");
-*/
-
-Console.WriteLine($"\nЗадача 43.  Найти точку пересечения двух прямых \n");
-
-double[,] coeff = new double[2, 2];
-double[] crossPoint = new double[2];
-
-void InputCoefficients(){
-  for (int i = 0; i < coeff.GetLength(0); i++)
-  {
-    Console.Write($"Введите коэффициенты {i+1}-го уравнения (y = k * x + b):\n");
-    for (int j = 0; j < coeff.GetLength(1); j++)
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-      if(j==0) Console.Write($"Введите коэффициент k: ");
-      else Console.Write($"Введите коэффициент b: ");
-      coeff[i,j] = Convert.ToInt32(Console.ReadLine());
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            array[i, j] = Convert.ToDouble(new Random().Next(-100, 100)) / 10;
+        }
     }
-  }
 }
 
-double[] Decision(double[,] coeff)
+void PrintArray(double[,] array)
 {
-  crossPoint[0] = (coeff[1,1] - coeff[0,1]) / (coeff[0,0] - coeff[1,0]);
-  crossPoint[1] = crossPoint[0] * coeff[0,0] + coeff[0,1];
-  return crossPoint;
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        Console.Write("[ ");
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write(array[i, j] + " ");
+        }
+        Console.Write("]");
+        Console.WriteLine("");
+    }
 }
 
-void OutputResponse(double[,] coeff)
+//Задача 50:
+//Напишите программу, которая на вход принимает позиции элемента в двумерном массиве,
+//и возвращает значение этого элемента или же указание, что такого элемента нет.
+//Например, задан массив:
+//1 4 7 2
+//5 9 2 3
+//8 4 2 4
+//17 -> такого числа в массиве нет
+/*Console.WriteLine("Введите номер по вертикали: ");
+Console.WriteLine("Введите позицию по горизонтали: ");
+Console.WriteLine("Такого числа в массиве нет");
+*/
+
+int[,] array = { { 1, 4, 7, 2 }, { 5, 9, 2, 3 }, { 8, 4, 2, 4 } };
+
+ShowArray();
+
+Console.WriteLine("Задача 50. Введите номер по вертикали: ");
+int lineNumber = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите позицию по горизонтали: ");
+int positionNumber = Convert.ToInt32(Console.ReadLine());
+
+PrintNuberByIndex(lineNumber, positionNumber);
+
+void PrintNuberByIndex(int lineNumber, int positionNumber)
 {
-  if (coeff[0,0] == coeff[1,0] && coeff[0,1] == coeff[1,1]) 
-  {
-    Console.Write($"\nПрямые совпадают");
-  }
-  else if (coeff[0,0] == coeff[1,0] && coeff[0,1] != coeff[1,1]) 
-  {
-    Console.Write($"\nПрямые параллельны");
-  }
-  else 
-  {
-    Decision(coeff);
-    Console.Write($"\nТочка пересечения прямых: ({crossPoint[0]}, {crossPoint[1]})");
-  }
+    if (array.GetLength(0) > lineNumber && array.GetLength(1) > positionNumber)
+    {
+        Console.WriteLine(array[lineNumber, positionNumber]);
+    }
+    else
+    {
+        Console.WriteLine("Такого числа в массиве нет");
+    }
 }
 
-InputCoefficients();
-OutputResponse(coeff);
+void ShowArray()
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write($"{array[i, j]}\t");
+        }
 
+        Console.WriteLine();
+    }
+}
+
+
+
+//Задача 52:
+//Задайте двумерный массив из целых чисел.
+//Найдите среднее арифметическое элементов в каждом столбце.
+//Например, задан массив:
+//1 4 7 2
+//5 9 2 3
+//8 4 2 4
+//Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
+/*Console.WriteLine("введите количество строк");
+Console.WriteLine("введите количество столбцов");
+*/
+
+Console.WriteLine("Задача 52. введите количество строк");
+int n = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("введите количество столбцов");
+int m = Convert.ToInt32(Console.ReadLine());
+
+int[,] numbers = new int[n, m];
+FillArrayRandomNumbers(numbers);
+
+
+for (int j = 0; j < numbers.GetLength(1); j++)
+{
+    double avarage = 0;
+    for (int i = 0; i < numbers.GetLength(0); i++)
+    {
+        avarage = (avarage + numbers[i, j]);
+    }
+    avarage = avarage / n;
+    Console.Write(avarage + "; ");
+}
+Console.WriteLine();
+PrintArray(numbers);
+
+
+
+void FillArrayRandomNumbers(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            array[i, j] = new Random().Next(0, 10);
+        }
+    }
+}
+
+void PrintArray(int[,] array)
+{
+
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        Console.Write("[ ");
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write(array[i, j] + " ");
+        }
+        Console.Write("]");
+        Console.WriteLine("");
+    }
+}
